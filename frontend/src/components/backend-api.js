@@ -1,28 +1,19 @@
 import axios from 'axios'
 
 const AXIOS = axios.create({
-  baseURL: `/api`,
+  baseURL: `/jokes`,
   timeout: 1000
 });
 
 
 export default {
-    hello() {
-        return AXIOS.get(`/hello`);
+    getRandomJoke() {
+        return AXIOS.get(`/random`);
     },
-    getUser(userId) {
-        return AXIOS.get(`/user/` + userId);
-    },
-    createUser(firstName, lastName) {
-        return AXIOS.post(`/user/` + firstName + '/' + lastName);
-    },
-    getSecured(user, password) {
-        return AXIOS.get(`/secured/`,{
-            auth: {
-                username: user,
-                password: password
-            }});
+    createJoke() {
+        return AXIOS.post(``, `lol`)
     }
+
 }
 
 
