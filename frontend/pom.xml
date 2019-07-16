@@ -28,7 +28,7 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v12.6.0</nodeVersion>
+                            <nodeVersion>v11.6.0</nodeVersion>
                         </configuration>
                     </execution>
                     <!-- Install all project dependencies -->
@@ -52,17 +52,6 @@
                         </goals>
                         <configuration>
                             <arguments>run build</arguments>
-                        </configuration>
-                    </execution>
-                    <!-- Run Unit tests with Jest -->
-                    <execution>
-                        <id>npm run test:unit</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <configuration>
-                            <arguments>run test:unit</arguments>
                         </configuration>
                     </execution>
                 </executions>
