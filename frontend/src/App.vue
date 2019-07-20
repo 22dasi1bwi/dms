@@ -2,7 +2,7 @@
     <div class="w-full mx-auto font-sans relative min-h-screen-99">
         <app-navigation></app-navigation>
         <router-view class="px-8 container mx-auto"></router-view>
-<!--        <the-global-message></the-global-message>-->
+        <the-global-message></the-global-message>
     </div>
 </template>
 
@@ -15,6 +15,7 @@
         components: {
             appNavigation: Navigation,
             TheGlobalMessage: TheGlobalMessage,
+
         }
     }
 </script>
