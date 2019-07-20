@@ -8,5 +8,4 @@ export const routes = [
     {path: '/jokes/search', name: 'searchJoke', component: SearchJokes},
     {path: '/jokes/add', name: 'addJoke', component: AddJoke},
     {path: '/jokes/popular', name: 'mostPopularJokes', component: MostPopularJokes},
-
 ];
