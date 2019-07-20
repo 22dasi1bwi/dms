@@ -1,10 +1,21 @@
 <template>
   <div>
-    <div class="py-2">
       <vt-text-field-outline class="w-1/2" placeholder="Search for jokes" v-model="searchText"/>
       <vt-button @click="callSearchForJokeApi" >Search for Jokes</vt-button>
-      <h1>Jokes: {{ responseMsg }}</h1>
-    </div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <td>Phrase</td>
+          <td>Popularity</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="joke in jokes">
+          <td>{{ joke.phrase }}</td>
+          <td>{{ joke.popularity }}</td>
+        </tr>
+        </tbody>
+      </table>
   </div>
 </template>
 
@@ -16,7 +27,7 @@
     data() {
       return {
         searchText: "",
-        responseMsg: [],
+        jokes: [],
       }
     },
     methods: {
@@ -26,12 +37,7 @@
             'phrase': this.searchText
           }
         }).then(response => {
-          this.responseMsg = response.data.map((joke) => {
-           return {
-              phrase: joke.phrase,
-              popularity: joke.popularity
-           }
-          })
+          this.jokes = response.data
         })
       }
     }
