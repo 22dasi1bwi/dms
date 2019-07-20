@@ -1,0 +1,77 @@
+<template>
+  <div @click.prevent="$emit('click')"
+       class="py-4 cursor-pointer text-grey-900 border-2 border-transparent hover:shadow-md hover:border-teal-500 px-4 rounded w-full"
+       >
+    <div class="flex justify-between">
+      <slot name="default"></slot>
+      <div v-if="renderTitle()"
+        :class="combinedTitleClass">{{title}}</div>
+      <div class="right-0">
+        <slot name="icon">
+          <vt-svg-caret-right class="w-6 h-6"></vt-svg-caret-right>
+        </slot>
+      </div>
+    </div>
+    <slot name="subtitle"></slot>
+    <div v-if="renderSubtitle()"
+      class="text-sm font-light"
+         >{{subtitle}}
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+  import VtSvgCaretRight from "../VtSVG/VtSvgCaretRight.vue";
+
+  export default {
+    name: 'VtClickableListItem',
+    components: {VtSvgCaretRight},
+    methods: {
+      renderTitle(){
+        //render title element if no slot is defined
+        return (typeof this.$slots['default'] === 'undefined') && typeof this.title !== 'undefined' && this.title !== '';
+      },
+      renderSubtitle(){
+        //render subtitle element if no slot is defined
+        return typeof this.$slots['subtitle'] === 'undefined' && typeof this.subtitle !== 'undefined' && this.subtitle !== '';
+      }
+    },
+    props: {
+      title: {
+        required: false,
+        type: String
+      },
+      subtitle: {
+        required: false,
+        type: String
+      },
+      titleClass: {
+        required: false,
+        type: [String, Object],
+        default(){ return {'text-xl': true, 'font-medium': true}}
+      }
+    },
+    computed: {
+      combinedTitleClass(){
+        let titleClass = {};
+        if(typeof this.titleClass==='string'){
+          this.titleClass.split(' ').forEach(
+            cssClass => {
+              titleClass[cssClass] = true;
+            }
+          )
+        } else if (typeof this.titleClass==='object'){
+          titleClass = this.titleClass;
+        }
+        else {
+          titleClass = {};
+        }
+        return {
+          'mb-1': true,
+          ...titleClass
+        }
+      }
+    }
+  }
+</script>
+
