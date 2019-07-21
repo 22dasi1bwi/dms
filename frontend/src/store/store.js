@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {MostPopularJokes} from "./modules/mostPopularJokes";
 import {SearchJokes} from "./modules/searchJokes";
+import {RandomJoke} from "./modules/randomJoke";
 
 Vue.use(Vuex);
 
@@ -9,7 +10,8 @@ export const store = new Vuex.Store({
   namespaced: true,
   modules: {
     MostPopularJokes: MostPopularJokes,
-    SearchJokes: SearchJokes
+    SearchJokes: SearchJokes,
+    RandomJoke: RandomJoke,
   },
   state: { //define properties where data can be stored
     globalError: {

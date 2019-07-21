@@ -28,7 +28,7 @@ class JokeResource (private val jokeRepository: JokeRepository) {
     }
 }
 
-data class Joke (@Id val id: String?, val phrase: String, var popularity: Long = 1) {
+data class Joke (@Id val id: String?, val phrase: String, var popularity: Long = 1, val creator: String = "Anonymous") {
 
     fun voteUp() { this.popularity = this.popularity + 1}
 }
