@@ -1,46 +1,44 @@
 <template>
   <div>
-      <vt-text-field-outline class="w-1/2" placeholder="Search for jokes" v-model="searchText" @keyup.enter.native="callSearchForJokeApi"/>
-      <vt-button @click="callSearchForJokeApi" :disabled="searchText.length == 0">Search for Jokes</vt-button>
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <td>Phrase</td>
-          <td>Popularity</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="joke in jokes">
-          <td>{{ joke.phrase }}</td>
-          <td>{{ joke.popularity }}</td>
-        </tr>
-        </tbody>
-      </table>
+    <vt-text-field-outline class="w-1/2" placeholder="Search for jokes" v-model="searchText" @keyup.enter.native=""/>
+    <vt-button @click="doSearch()" :disabled="searchText.length == 0">Search for Jokes</vt-button>
+    <vt-scroll-to-top/>
+    <div class="flex flex-row items-center" v-for="joke in searchJokes" :key="joke.id">
+      <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity)"></vt-clickable-list-item>
+    </div>
   </div>
 </template>
 
-<script>
-  import {APIS} from "../../backend-apis";
+<script lang="ts">
 
-  //TODO: if none can be found, display a toast
+  import {mapState} from 'vuex';
+
   export default {
     data() {
       return {
-        searchText: "",
-        jokes: [],
-      }
+        searchText: ''
+      };
+    },
+    computed: {
+      ...mapState('SearchJokes', {
+        searchJokes: 'searchJokes',
+      })
     },
     methods: {
-      callSearchForJokeApi() {
-        APIS.searchJoke.get({
-          'q': {
-            'phrase': this.searchText
-          }
-        }).then(response => {
-          this.jokes = response.data
-        })
+      getSubtitle(popularity) {
+        return 'Popularity: ' + popularity
+      },
+      doSearch(){
+        this.$store.state.searchText = this.searchText;
+        this.$store.dispatch('SearchJokes/load');
       }
-    }
+    },
+    created() {
+      if(!(this.searchText.length === 0)){
+        this.$store.dispatch('SearchJokes/load');
+      }
+    },
   }
 </script>
+
 

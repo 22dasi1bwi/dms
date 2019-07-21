@@ -1,43 +1,33 @@
 <template>
-  <div>
-    <vt-datatable :data=tableData :config=tableConfig
-                  @datatablenewstart="newTableStart"
-                  @datatablesetsort="setSortOrder"
-                  @datatablesetsearch="setSearches">
-    </vt-datatable>
+  <div class="mt-2 py-2">
+    <vt-scroll-to-top/>
+    <div class="flex flex-row items-center" v-for="joke in mostPopularJokes" :key="joke.id">
+      <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity)"></vt-clickable-list-item>
+    </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+
   import {mapState} from 'vuex';
 
   export default {
-    name: 'MostPopularJokes',
+    data() {
+      return {};
+    },
     computed: {
       ...mapState('MostPopularJokes', {
-        tableConfig: 'tableConfig',
-        tableData: 'tableData',
+        mostPopularJokes: 'mostPopularJokes',
       })
     },
-    data() {
-      return {
-        jokes: [],
-      }
-    },
     methods: {
-      setSortOrder(sortOrder){
-        this.$store.dispatch('MostPopularJokes/setSortOrder', sortOrder)
-      },
-      newTableStart(start){
-        this.$store.dispatch('MostPopularJokes/setTableStart', start)
-      },
-      setSearches(searchColumns){
-        this.$store.dispatch('MostPopularJokes/setSearchColumns', searchColumns)
+      getSubtitle(popularity) {
+        return 'Popularity: ' + popularity
       }
     },
-    mounted() {
-      this.$store.dispatch('MostPopularJokes/load')
-    }
+      created() {
+        this.$store.dispatch('MostPopularJokes/load');
+      },
   }
 </script>
 

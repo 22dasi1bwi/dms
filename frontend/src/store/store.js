@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {RandomJoke} from './modules/randomJoke';
 import {MostPopularJokes} from "./modules/mostPopularJokes";
+import {SearchJokes} from "./modules/searchJokes";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   namespaced: true,
   modules: {
-    RandomJoke: RandomJoke,
-    MostPopularJokes: MostPopularJokes
+    MostPopularJokes: MostPopularJokes,
+    SearchJokes: SearchJokes
   },
   state: { //define properties where data can be stored
     globalError: {
@@ -108,9 +108,6 @@ export const store = new Vuex.Store({
     },
     showGlobalBanner({commit}, config) {
       commit('showGlobalBanner', config);
-    },
-    allDocumentsValid({commit}) {
-      commit('allDocumentsValid');
     }
   }
 });

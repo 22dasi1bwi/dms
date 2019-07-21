@@ -1,28 +1,30 @@
 import {APIS} from "../../backend-apis";
 
-export const MostPopularJokes = {
+export const SearchJokes = {
   namespaced: true,
   state: {
-    mostPopularJokes: []
+    searchJokes: [],
   },
   mutations: {
-    setMostPopularJokes(state, mostPopularJokes) {
-      state.mostPopularJokes = mostPopularJokes
+    setSearchJokes(state, searchJokes) {
+      state.searchJokes = searchJokes;
     },
   },
   actions: {
     load({commit, dispatch}) {
-      APIS.mostPopularJokes.get().then(
-        response => {
+      APIS.searchJoke.get({
+        'q': {
+          'phrase': this.state.searchText
+        }
+      }).then(response => {
           if (response.body && response.body.length > 0) {
-            commit('setMostPopularJokes', response.body);
+            console.info("success response")
+            commit('setSearchJokes', response.body);
           } else if (response.body && response.body.length === 0) {
-            //no data present
-            commit('setMostPopularJokes', []);
+            commit('setSearchJokes', []);
           } else {
-            //no response body, also an error.
             dispatch('showGlobalError', {caption: 'Error', message: 'Response body empty.'}, {root: true});
-            commit('setMostPopularJokes', []);
+            commit('setSearchJokes', []);
           }
         },
         error => {
@@ -31,5 +33,9 @@ export const MostPopularJokes = {
       )
     },
   },
+  setters: {
+    setSearchText(searchText) {
+      state.searchText = searchText
+    }
+  }
 };
-

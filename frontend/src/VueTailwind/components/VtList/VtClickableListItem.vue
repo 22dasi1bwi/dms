@@ -6,11 +6,6 @@
       <slot name="default"></slot>
       <div v-if="renderTitle()"
         :class="combinedTitleClass">{{title}}</div>
-      <div class="right-0">
-        <slot name="icon">
-          <vt-svg-caret-right class="w-6 h-6"></vt-svg-caret-right>
-        </slot>
-      </div>
     </div>
     <slot name="subtitle"></slot>
     <div v-if="renderSubtitle()"
@@ -21,11 +16,9 @@
 </template>
 
 <script lang="ts">
-  import VtSvgCaretRight from "../VtSVG/VtSvgCaretRight.vue";
 
   export default {
     name: 'VtClickableListItem',
-    components: {VtSvgCaretRight},
     methods: {
       renderTitle(){
         //render title element if no slot is defined
