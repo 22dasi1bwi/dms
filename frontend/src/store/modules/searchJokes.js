@@ -18,7 +18,6 @@ export const SearchJokes = {
         }
       }).then(response => {
           if (response.body && response.body.length > 0) {
-            console.info("success response")
             commit('setSearchJokes', response.body);
           } else if (response.body && response.body.length === 0) {
             commit('setSearchJokes', []);
