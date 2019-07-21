@@ -1,4 +1,5 @@
 import {APIS} from "../../backend-apis";
+import Vue from 'vue';
 
 export const SearchJokes = {
   namespaced: true,
@@ -17,13 +18,15 @@ export const SearchJokes = {
           'phrase': this.state.searchText
         }
       }).then(response => {
-          if (response.body && response.body.length > 0) {
+          if (response.body && response.body.length !== 0) {
             commit('setSearchJokes', response.body);
-          } else if (response.body && response.body.length === 0) {
-            commit('setSearchJokes', []);
           } else {
-            dispatch('showGlobalError', {caption: 'Error', message: 'Response body empty.'}, {root: true});
             commit('setSearchJokes', []);
+            Vue.notify({
+              title: 'Vote',
+              type: 'warn',
+              text: 'No jokes found with text: ' + this.state.searchText
+            })
           }
         },
         error => {
@@ -32,9 +35,4 @@ export const SearchJokes = {
       )
     },
   },
-  setters: {
-    setSearchText(searchText) {
-      state.searchText = searchText
-    }
-  }
 };

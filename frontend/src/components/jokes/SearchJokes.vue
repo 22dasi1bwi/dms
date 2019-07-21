@@ -4,7 +4,7 @@
     <vt-button @click="doSearch()" :disabled="searchText.length == 0">Search for Jokes</vt-button>
     <vt-scroll-to-top/>
     <div class="flex flex-row items-center" v-for="joke in searchJokes" :key="joke.id">
-      <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity)"></vt-clickable-list-item>
+      <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity, joke.author)"></vt-clickable-list-item>
     </div>
   </div>
 </template>
@@ -25,9 +25,10 @@
       })
     },
     methods: {
-      getSubtitle(popularity) {
-        return 'Popularity: ' + popularity
+      getSubtitle(popularity, author) {
+        return 'Popularity: ' + popularity + ', Author: ' + author;
       },
+
       doSearch(){
         this.$store.state.searchText = this.searchText;
         this.$store.dispatch('SearchJokes/load');

@@ -2,7 +2,7 @@
   <div class="mt-2 py-2">
     <vt-scroll-to-top/>
     <div class="flex flex-row items-center" v-for="joke in mostPopularJokes" :key="joke.id">
-      <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity)"></vt-clickable-list-item>
+      <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity, joke.author)"></vt-clickable-list-item>
     </div>
   </div>
 </template>
@@ -21,8 +21,8 @@
       })
     },
     methods: {
-      getSubtitle(popularity) {
-        return 'Popularity: ' + popularity
+      getSubtitle(popularity, author) {
+        return 'Popularity: ' + popularity + ', Author: ' + author
       }
     },
       created() {
