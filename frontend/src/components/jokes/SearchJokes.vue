@@ -1,7 +1,7 @@
 <template>
   <div>
-      <vt-text-field-outline class="w-1/2" placeholder="Search for jokes" v-model="searchText"/>
-      <vt-button @click="callSearchForJokeApi" >Search for Jokes</vt-button>
+      <vt-text-field-outline class="w-1/2" placeholder="Search for jokes" v-model="searchText" @keyup.enter.native="callSearchForJokeApi"/>
+      <vt-button @click="callSearchForJokeApi" :disabled="searchText.length == 0">Search for Jokes</vt-button>
       <table class="table table-striped">
         <thead>
         <tr>

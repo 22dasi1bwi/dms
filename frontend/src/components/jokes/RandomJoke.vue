@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="pt-2">
-      <vt-button @click="callRandomJokeApi" >Generate Joke</vt-button>
+      <vt-button @click="callRandomJokeApi" >Get Random Joke</vt-button>
       <h1>Joke: {{ responseMsg }}</h1>
     </div>
     <div class="pt-2">
@@ -12,11 +12,12 @@
 
 <script>
   import {APIS} from "../../backend-apis";
+  import axios from "axios";
 
   export default {
     data() {
       return {
-        id: "",
+        jokeId: "",
         responseMsg: [],
       }
     },
@@ -24,15 +25,26 @@
       callRandomJokeApi() {
         APIS.randomJoke.get().then(response => {
           this.responseMsg = response.data.phrase
-          this.id = response.data.id
+          this.jokeId = response.data.id
         })
       },
       callVoteForJokeApi() {
-        APIS.voteForJoke.update({
-          params: {
-            jokeId: 'randomId'
+        //TODO isn't that possible with Vue.resource()?
+        axios.put('/api/jokes/' + this.jokeId + '/vote').then(_ => {
+          this.$notify({
+            title: 'Vote',
+            type: 'success',
+            text: 'Your vote has been successfully registered.'
+          });
+        },
+          () => {
+            this.$notify({
+              title: 'Vote',
+              type: 'error',
+              text: 'Your vote could not be registered.'
+            });
           }
-        });
+        )
       }
     }
   }

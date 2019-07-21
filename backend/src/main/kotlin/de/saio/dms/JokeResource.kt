@@ -3,11 +3,10 @@ package de.saio.dms
 import org.springframework.data.annotation.Id
 import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
-import java.lang.IllegalArgumentException
 
 @RestController
 @RequestMapping("/api/jokes")
-class DmsResource (private val jokeRepository: JokeRepository) {
+class JokeResource (private val jokeRepository: JokeRepository) {
 
     @GetMapping("/random")
     fun getRandomJoke() = jokeRepository.findAll().random()
@@ -21,11 +20,11 @@ class DmsResource (private val jokeRepository: JokeRepository) {
     @GetMapping
     fun searchForJokes(@RequestParam phrase: String) = jokeRepository.findByPhraseLike(phrase).sortedByDescending { it.popularity }.take(10)
 
-    @PutMapping("/vote")
-    fun vote (@RequestParam jokeId: String) : Joke {
+    @PutMapping("{jokeId}/vote")
+    fun vote (@PathVariable jokeId: String) {
         val jokeForVoteUp = jokeRepository.findById(jokeId)
-        jokeForVoteUp.orElseThrow { IllegalArgumentException("Joke with id: $jokeId not found.") } .voteUp()
-        return jokeRepository.save(jokeForVoteUp.get())
+        jokeForVoteUp.orElseThrow { JokeDoesNotExistException("Joke with id: $jokeId not found.") } .voteUp()
+        jokeRepository.save(jokeForVoteUp.get())
     }
 }
 

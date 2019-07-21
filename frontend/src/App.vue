@@ -3,6 +3,7 @@
         <app-navigation></app-navigation>
         <router-view class="px-8 container mx-auto"></router-view>
         <the-global-message></the-global-message>
+        <notifications/>
     </div>
 </template>
 
