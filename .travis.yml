@@ -1,0 +1,11 @@
+language: kotlin
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+  - openjdk11
+
+script: mvn clean install
+
+cache:
+  directories:
+  - node_modules
