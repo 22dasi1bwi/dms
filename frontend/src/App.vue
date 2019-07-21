@@ -16,7 +16,6 @@
         components: {
             appNavigation: Navigation,
             TheGlobalMessage: TheGlobalMessage,
-
         }
     }
 </script>

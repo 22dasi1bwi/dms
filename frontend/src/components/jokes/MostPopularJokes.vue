@@ -1,38 +1,42 @@
 <template>
   <div>
-    <vt-button @click="callMostPopularJokesApi" >Get Most Popular Jokes</vt-button>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <td>Phrase</td>
-        <td>Popularity</td>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="joke in jokes">
-        <td>{{ joke.phrase }}</td>
-        <td>{{ joke.popularity }}</td>
-      </tr>
-      </tbody>
-    </table>
+    <vt-datatable :data=tableData :config=tableConfig
+                  @datatablenewstart="newTableStart"
+                  @datatablesetsort="setSortOrder"
+                  @datatablesetsearch="setSearches">
+    </vt-datatable>
   </div>
 </template>
 
 <script>
-  import {APIS} from "../../backend-apis";
+  import {mapState} from 'vuex';
 
   export default {
+    name: 'MostPopularJokes',
+    computed: {
+      ...mapState('MostPopularJokes', {
+        tableConfig: 'tableConfig',
+        tableData: 'tableData',
+      })
+    },
     data() {
       return {
         jokes: [],
       }
     },
     methods: {
-      callMostPopularJokesApi() {
-        APIS.mostPopularJokes.get().then(response => {
-          this.jokes = response.data
-        })
+      setSortOrder(sortOrder){
+        this.$store.dispatch('MostPopularJokes/setSortOrder', sortOrder)
+      },
+      newTableStart(start){
+        this.$store.dispatch('MostPopularJokes/setTableStart', start)
+      },
+      setSearches(searchColumns){
+        this.$store.dispatch('MostPopularJokes/setSearchColumns', searchColumns)
       }
+    },
+    mounted() {
+      this.$store.dispatch('MostPopularJokes/load')
     }
   }
 </script>

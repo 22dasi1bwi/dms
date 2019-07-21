@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {RandomJoke} from './modules/randomJoke';
+import {MostPopularJokes} from "./modules/mostPopularJokes";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   namespaced: true,
   modules: {
-    RandomJoke: RandomJoke
+    RandomJoke: RandomJoke,
+    MostPopularJokes: MostPopularJokes
   },
   state: { //define properties where data can be stored
     globalError: {

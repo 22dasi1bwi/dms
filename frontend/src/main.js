@@ -8,6 +8,7 @@ import {routes} from './routes';
 import vueDebounce from 'vue-debounce'
 import VueTailwind from './VueTailwind/plugin';
 import Notifications from 'vue-notification'
+import Vuetify from 'vuetify';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -15,6 +16,7 @@ Vue.use(Vuelidate);
 Vue.use(VueTailwind);
 Vue.use(vueDebounce);
 Vue.use(Notifications);
+Vue.use(Vuetify);
 
 const router = new VueRouter({
     routes,
