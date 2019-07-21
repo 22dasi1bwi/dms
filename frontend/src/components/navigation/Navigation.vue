@@ -15,8 +15,6 @@
 <script>
   import NavigationButton from './NavigationButton.vue';
   import TheGlobalError from '../TheGlobalError.vue';
-  import LogoutButton from "./TheLogoutButton.vue";
-  import SvgPerson from "../svg/SvgPerson.vue"
   import TheGlobalMessageBanner from "../TheGlobalMessageBanner.vue";
 
 
@@ -24,8 +22,6 @@
     components: {
       TheGlobalError,
       TheGlobalMessageBanner,
-      LogoutButton,
-      SvgPerson,
       NavigationButton,
     }
   }
