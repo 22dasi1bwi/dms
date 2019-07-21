@@ -1,17 +1,12 @@
 {
-  "name": "codo",
-  "description": "Vue.js frontend for CODO",
+  "name": "dms",
+  "description": "Best of MBc",
   "version": "1.0.0",
-  "author": "Hauke Brammer <Hauke.Brammer@novatec-gmbh.de>",
+  "author": "Silvio D'Alessandro <silvio.dalessandro@novatec-gmbh.de>",
   "license": "MIT",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "ldev": "cross-env NODE_ENV=development webpack --mode=development --hot --watch",
-    "build-ldev": "cross-env NODE_ENV=development webpack --mode=development",
-    "build:types": "tsc --emitDeclarationOnly --skipLibCheck",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "build": "tsc --skipLibCheck && cross-env NODE_ENV=production webpack --mode=production --progress --hide-modules"
   },
   "dependencies": {
