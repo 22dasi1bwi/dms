@@ -1,12 +1,14 @@
 language: kotlin
 
-services:
-  - docker
-
-after_success:
-  - docker build -t "$DOCKER_USERNAME"/dms:1 .
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker push "$DOCKER_USERNAME"/dms:1
+deploy:
+  provider: cloudfoundry
+  username: $CLOUD_FOUNDRY_USER
+  password: $CLOUD_FOUNDRY_PASSWORD
+  api: https://api.run.pivotal.io
+  organization: $CLOUD_FOUNDRY_ORG
+  space: staging
+  app_name: dms
+  
 
 jdk:
   - openjdk11
