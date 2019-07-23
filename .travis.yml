@@ -4,9 +4,9 @@ services:
   - docker
 
 after_success:
-  - docker build -t 1 .
+  - docker build -t "$DOCKER_USERNAME"/dms:1 .
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker push silviod92/dms:1
+  - docker push "$DOCKER_USERNAME"/dms:1
 
 jdk:
   - openjdk11
