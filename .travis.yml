@@ -1,7 +1,14 @@
 language: kotlin
+
+services:
+  - docker
+
+after_success:
+  - docker build -t 1 .
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker push silviod92/dms:1
+
 jdk:
-  - oraclejdk8
-  - oraclejdk9
   - openjdk11
 
 script: mvn clean install
