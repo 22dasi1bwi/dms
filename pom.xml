@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.saio</groupId>
     <artifactId>dms</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1</version>
     <name>dms</name>
     <description>MBc's best of</description>
     <packaging>pom</packaging>
