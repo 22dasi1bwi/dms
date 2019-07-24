@@ -8,6 +8,9 @@ deploy:
   organization: $CLOUD_FOUNDRY_ORG
   space: development
   app_name: dms
+  env:
+    DB_USER_NAME: $DB_USER_NAME
+    DB_PASSWORD: $DB_PASSWORD
   
 
 jdk:
