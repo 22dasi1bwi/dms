@@ -29,12 +29,13 @@ export const RandomJoke = {
     },
     upVoteJoke({commit, dispatch}) {
       //TODO isn't that possible with Vue.resource()?
-      axios.put('/api/jokes/' + this.state.jokeId + '/vote').then(_ => {
+      axios.put('/api/jokes/' + this.state.jokeId + '/vote').then(response => {
             Vue.notify({
               title: 'Vote',
               type: 'success',
               text: 'Your vote has been successfully registered.'
           })
+        RandomJoke.state.randomJoke.popularity = response.data.popularity
         },
           error => {
             Vue.notify({
