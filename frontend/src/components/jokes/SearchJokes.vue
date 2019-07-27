@@ -3,7 +3,7 @@
     <div class="py-6 w-full text-sm">
     <vt-text-field-outline class="w-1/2" placeholder="Search for jokes" v-model="searchText" @keyup.enter.native="doSearch"/>
     </div>
-    <vt-button @click="doSearch()" :disabled="searchText.length == 0">Search for Jokes</vt-button>
+    <vt-button @click="doSearch()" :disabled="searchText.length == 0">Search <font-awesome-icon icon="search"></font-awesome-icon></vt-button>
     <vt-scroll-to-top/>
     <div class="flex flex-row items-center" v-for="joke in searchJokes" :key="joke.id">
       <vt-clickable-list-item :title="joke.phrase" :subtitle="getSubtitle(joke.popularity, joke.author)"></vt-clickable-list-item>

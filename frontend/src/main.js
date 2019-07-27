@@ -6,11 +6,19 @@ import Notifications from 'vue-notification'
 import {store} from './store/store';
 import {routes} from './routes';
 import App from './App.vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faThumbsUp);
+library.add(faSearch);
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueTailwind);
 Vue.use(Notifications);
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 const router = new VueRouter({
     routes,

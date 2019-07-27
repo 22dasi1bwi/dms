@@ -8,7 +8,7 @@
       <vt-clickable-list-item :title="randomJoke.phrase" :subtitle="getSubtitle(randomJoke.popularity, randomJoke.author)"></vt-clickable-list-item>
     </div>
      <div class="mb-4 py-10 w-full text-sm">
-    <vt-button @click="upVoteJoke" >Vote</vt-button>
+    <vt-button @click="upVoteJoke" >Like <font-awesome-icon icon="thumbs-up"/></vt-button>
      </div>
   </div>
 </template>
