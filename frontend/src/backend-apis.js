@@ -7,7 +7,7 @@ export const APIS = {
   'randomJoke': Vue.resource('/api/jokes/random'),
   'searchJoke': Vue.resource('/api/jokes{?q*}'),
   'createJoke': Vue.resource('/api/jokes'),
-  'voteForJoke': Vue.resource('/api/jokes/{jokeId}/vote'),
+  'likeJoke': Vue.resource('/api/jokes/{jokeId}/like'),
   'mostLikedJokes': Vue.resource('/api/jokes/likes')
 };
 

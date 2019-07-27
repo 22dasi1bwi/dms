@@ -19,8 +19,8 @@ class JokeResource (private val jokeRepository: JokeRepository) {
     @GetMapping
     fun searchForJokes(@RequestParam phrase: String) = jokeRepository.findByPhraseLike(phrase).sortedByDescending { it.likes }.take(5)
 
-    @PutMapping("{jokeId}/vote")
-    fun vote (@PathVariable jokeId: String): Joke {
+    @PutMapping("{jokeId}/like")
+    fun likeJoke (@PathVariable jokeId: String): Joke {
         val jokeForVoteUp = jokeRepository.findById(jokeId)
         jokeForVoteUp.orElseThrow { JokeDoesNotExistException("Joke with id: $jokeId not found.") } .like()
         return jokeRepository.save(jokeForVoteUp.get())

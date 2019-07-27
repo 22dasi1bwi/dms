@@ -5,7 +5,7 @@
         <navigation-button exact to="/jokes/random">Random Joke</navigation-button>
         <navigation-button exact to="/jokes/search">Search Joke</navigation-button>
         <navigation-button exact to="/jokes/add">Add Joke</navigation-button>
-        <navigation-button exact to="/jokes/likes">Most Popular Jokes</navigation-button>
+        <navigation-button exact to="/jokes/likes">Leaderboard</navigation-button>
       </div>
     </nav>
     <the-global-error></the-global-error>

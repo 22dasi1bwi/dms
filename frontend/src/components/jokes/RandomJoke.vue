@@ -8,7 +8,7 @@
       <vt-clickable-list-item :title="randomJoke.phrase" :subtitle="getSubtitle(randomJoke.likes, randomJoke.author)"></vt-clickable-list-item>
     </div>
      <div class="mb-4 py-10 w-full text-sm">
-    <vt-button @click="upVoteJoke" >Like <font-awesome-icon icon="thumbs-up"/></vt-button>
+    <vt-button @click="likeJoke" >Like <font-awesome-icon icon="thumbs-up"/></vt-button>
      </div>
   </div>
 </template>
@@ -32,9 +32,9 @@
       getRandomJoke(){
         this.$store.dispatch('RandomJoke/getRandomJoke');
       },
-      upVoteJoke(){
+      likeJoke(){
           this.$store.state.jokeId = this.randomJoke.id;
-          this.$store.dispatch('RandomJoke/upVoteJoke');
+          this.$store.dispatch('RandomJoke/likeJoke');
       }
     },
     created() {

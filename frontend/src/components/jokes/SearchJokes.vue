@@ -14,19 +14,13 @@
 </template>
 
 <script lang="ts">
-
-  import {mapState} from 'vuex';
-
+  import {APIS} from "../../backend-apis";
   export default {
     data() {
       return {
-        searchText: ''
+        searchText: '',
+        searchJokes: [],
       };
-    },
-    computed: {
-      ...mapState('SearchJokes', {
-        searchJokes: 'searchJokes',
-      })
     },
     methods: {
       getSubtitle(likes, author) {
@@ -34,15 +28,25 @@
       },
 
       doSearch(){
-        this.$store.state.searchText = this.searchText;
-        this.$store.dispatch('SearchJokes/load');
+        APIS.searchJoke.get({
+          'q': {
+            'phrase': this.searchText
+          }
+        }).then(response => {
+            if (response.body && response.body.length !== 0) {
+              this.searchJokes = response.body;
+            } else {
+              this.searchJokes = [];
+              this.$notify({
+                title: 'Search',
+                type: 'warn',
+                text: 'No jokes found with text: ' + this.searchText
+              })
+            }
+          },
+        )
       }
-    },
-    created() {
-      if(!(this.searchText.length === 0)){
-        this.$store.dispatch('SearchJokes/load');
-      }
-    },
+    }
   }
 </script>
 
