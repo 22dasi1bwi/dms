@@ -23,7 +23,7 @@ export const SearchJokes = {
           } else {
             commit('setSearchJokes', []);
             Vue.notify({
-              title: 'Vote',
+              title: 'Search',
               type: 'warn',
               text: 'No jokes found with text: ' + this.state.searchText
             })

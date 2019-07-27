@@ -8,6 +8,6 @@ export const APIS = {
   'searchJoke': Vue.resource('/api/jokes{?q*}'),
   'createJoke': Vue.resource('/api/jokes'),
   'voteForJoke': Vue.resource('/api/jokes/{jokeId}/vote'),
-  'mostPopularJokes': Vue.resource('/api/jokes/popular')
+  'mostLikedJokes': Vue.resource('/api/jokes/likes')
 };
 

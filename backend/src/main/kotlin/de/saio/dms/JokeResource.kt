@@ -1,7 +1,6 @@
 package de.saio.dms
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -14,21 +13,21 @@ class JokeResource (private val jokeRepository: JokeRepository) {
     @PostMapping
     fun createJoke(@RequestBody joke: Joke) = jokeRepository.save(joke)
 
-    @GetMapping("/popular")
-    fun retrieveMostPopularJokes() = jokeRepository.findAll(Sort.by("popularity").descending()).take(5)
+    @GetMapping("/likes")
+    fun retrieveMostLikedJokes() = jokeRepository.findAll().sortedByDescending { it.likes }.take(5)
 
     @GetMapping
-    fun searchForJokes(@RequestParam phrase: String) = jokeRepository.findByPhraseLike(phrase).sortedByDescending { it.popularity }.take(10)
+    fun searchForJokes(@RequestParam phrase: String) = jokeRepository.findByPhraseLike(phrase).sortedByDescending { it.likes }.take(5)
 
     @PutMapping("{jokeId}/vote")
     fun vote (@PathVariable jokeId: String): Joke {
         val jokeForVoteUp = jokeRepository.findById(jokeId)
-        jokeForVoteUp.orElseThrow { JokeDoesNotExistException("Joke with id: $jokeId not found.") } .voteUp()
+        jokeForVoteUp.orElseThrow { JokeDoesNotExistException("Joke with id: $jokeId not found.") } .like()
         return jokeRepository.save(jokeForVoteUp.get())
     }
 }
 
-data class Joke (@Id val id: String?, val phrase: String, var popularity: Long = 1, var author: String) {
+data class Joke (@Id val id: String?, val phrase: String, var likes: Long = 1, var author: String) {
 
     init {
         if(author.isNullOrEmpty()){
@@ -36,5 +35,5 @@ data class Joke (@Id val id: String?, val phrase: String, var popularity: Long =
         }
     }
 
-    fun voteUp() { this.popularity = this.popularity + 1}
+    fun like() { this.likes = this.likes + 1}
 }

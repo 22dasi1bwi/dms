@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {MostPopularJokes} from "./modules/mostPopularJokes";
+import {MostLikedJokes} from "./modules/mostLikedJokes";
 import {SearchJokes} from "./modules/searchJokes";
 import {RandomJoke} from "./modules/randomJoke";
 
@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   namespaced: true,
   modules: {
-    MostPopularJokes: MostPopularJokes,
+    MostLikedJokes: MostLikedJokes,
     SearchJokes: SearchJokes,
     RandomJoke: RandomJoke,
   },

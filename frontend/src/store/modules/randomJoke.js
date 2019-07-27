@@ -35,7 +35,7 @@ export const RandomJoke = {
               type: 'success',
               text: 'Your vote has been successfully registered.'
           })
-        RandomJoke.state.randomJoke.popularity = response.data.popularity
+        RandomJoke.state.randomJoke.likes = response.data.likes
         },
           error => {
             Vue.notify({

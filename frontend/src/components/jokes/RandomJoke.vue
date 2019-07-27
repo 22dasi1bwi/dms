@@ -5,7 +5,7 @@
     <vt-button @click="getRandomJoke"  >Get Random Joke</vt-button>
      </div>
     <div class="flex flex-row items-center" v-bind="randomJoke" :key="randomJoke.id">
-      <vt-clickable-list-item :title="randomJoke.phrase" :subtitle="getSubtitle(randomJoke.popularity, randomJoke.author)"></vt-clickable-list-item>
+      <vt-clickable-list-item :title="randomJoke.phrase" :subtitle="getSubtitle(randomJoke.likes, randomJoke.author)"></vt-clickable-list-item>
     </div>
      <div class="mb-4 py-10 w-full text-sm">
     <vt-button @click="upVoteJoke" >Like <font-awesome-icon icon="thumbs-up"/></vt-button>
@@ -26,8 +26,8 @@
       })
     },
     methods: {
-      getSubtitle(popularity, author) {
-        return 'Popularity: ' + popularity + ', Author: ' + author
+      getSubtitle(likes, author) {
+        return 'Likes: ' + likes + ', Author: ' + author
       },
       getRandomJoke(){
         this.$store.dispatch('RandomJoke/getRandomJoke');
